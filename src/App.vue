@@ -1,32 +1,42 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Forms from './components/Forms.vue';
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="commit test" />
+  <main class="h-screen flex items-center justify-center w-full md:w-[60%] md:mx-auto xl:w-[40%]">
+
+    <!-- RECEIPT CARD -->
+    <div class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll md:overflow-clip">
+
+      <!-- HEADING -->
+      <div class="flex flex-col">
+        <h1 class="text-2xl md:text-4xl">GROCERY TRACKER</h1>
+        <p class="md:text-xl">This is a project we made for phase 2 of the SPARCS application proccess.</p>
+        <div class="flex justify-between border-b border-dotted">
+          <p>kindadailybren</p>
+          <p>ejminguez</p>
+        </div>
+      </div>
+
+      <!-- FORM -->
+       <div class="h-[400px]">
+        <Forms />
+       </div>
+
+       <!-- BOTTOM (FOOTER?) -->
+        <div>
+          <div class="flex justify-between border-y border-dotted text-4xl">
+            <p>TOTAL</p>
+            <p>&#x20B1 100</p>
+          </div>
+          <div class="flex justify-between md:text-xl">
+            <p>18/04/2025</p>
+            <p>SPARCS APPLICATION</p>
+          </div>
+          <div class="md:w-[70%] mx-auto">
+            <p class="text-2xl md:text-4xl">Thank You For Supporting Local Business!</p>
+          </div>
+        </div>
+    </div>
+  </main>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
