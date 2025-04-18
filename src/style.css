@@ -6,7 +6,9 @@
   font-weight: 400;
 
   background: linear-gradient(180deg, #6C7BC2 0%, #141E4D 100%);
-  background-attachment: fixed;
+  background-image: url('./assets/store-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

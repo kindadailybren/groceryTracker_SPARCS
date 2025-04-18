@@ -4,6 +4,7 @@ import { useAllProductsStore } from './stores/allProducts';
 import { onMounted, ref, watch, nextTick } from 'vue';
 import Button from './components/Button.vue';
 import { addItem } from './utils/actions';
+import MusicPlayer from './components/MusicPlayer.vue';
 
 const products = useAllProductsStore();
 
@@ -54,6 +55,8 @@ const delay = (ms: number) => new Promise(resolve => {
 
 <template>
   <main class="h-screen flex items-center justify-center w-full md:w-[60%] md:mx-auto xl:w-[40%]">
+
+    <MusicPlayer class="absolute top-0 left-[20%] md:left-[5%] md:top-[5%]" />
 
     <!-- RECEIPT CARD -->
     <div
