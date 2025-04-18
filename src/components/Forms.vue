@@ -17,6 +17,7 @@ const props = defineProps({
 const nameRef = ref(props.name)
 const quantityRef = ref(props.quantity)
 const priceRef = ref(props.price)
+const isEditing = ref(false)
 
 const update = async () => {
   await updateProduct(props.id, nameRef.value, quantityRef.value, priceRef.value);
@@ -32,15 +33,12 @@ const decrement = () => {
   }
 }
 
-const isEditing = ref(false)
 </script>
 
 
 <template>
   <section>
     <div>
-
-
       <!-- task -->
       <div class="flex flex-col gap-4">
         <div class="flex justify-between text-2xl xl:text-3xl items-center">
@@ -78,7 +76,7 @@ const isEditing = ref(false)
             </div>
           </div>
 
-          <Button @click="update" msg="Save" class="hover:bg-green-400" />
+          <Button @click="() => { update; isEditing = !isEditing }" msg="Save" class="hover:bg-green-400" />
         </div>
 
       </div>
