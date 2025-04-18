@@ -79,7 +79,7 @@ const delay = (ms: number) => new Promise(resolve => {
         </div>
         <div v-else>
           <Forms v-for="product in products.products" :name="product.name" :price="product.price"
-            :quantity="product.quantity" :key="product.id" />
+            :quantity="product.quantity" :id="product.id" :key="product.id" />
         </div>
       </div>
 
