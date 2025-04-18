@@ -56,7 +56,7 @@ const delay = (ms: number) => new Promise(resolve => {
 <template>
   <main class="h-screen flex items-center justify-center w-full md:w-[60%] md:mx-auto xl:w-[40%]">
 
-    <MusicPlayer class="absolute top-0 left-[20%] md:left-[5%] md:top-[5%]" />
+    <MusicPlayer class="absolute top-0 left-[25%] md:left-[5%] md:top-[5%]" />
 
     <!-- RECEIPT CARD -->
     <div
