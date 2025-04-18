@@ -1,7 +1,7 @@
 <script setup lang="ts">
 console.log("diri ang mga forms dawg!")
 import { ref, computed } from 'vue'
-import { updateProduct } from '../utils/actions.ts'
+import { updateProduct, deleteProduct } from '../utils/actions.ts'
 import Button from './Button.vue'
 import Trash from './Trash.vue'
 import { useAllProductsStore } from '../stores/allProducts.ts'
