@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import Forms from './components/Forms.vue';
+import { useItemStore } from '@/stores/item';
 </script>
 
 <template>
   <main class="h-screen flex items-center justify-center w-full md:w-[60%] md:mx-auto xl:w-[40%]">
 
     <!-- RECEIPT CARD -->
-    <div class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll md:overflow-clip">
+    <div
+      class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll md:overflow-clip">
 
       <!-- HEADING -->
       <div class="flex flex-col">
@@ -19,24 +21,24 @@ import Forms from './components/Forms.vue';
       </div>
 
       <!-- FORM -->
-       <div class="h-[400px]">
+      <div class="h-[400px]">
         <Forms />
-       </div>
+      </div>
 
-       <!-- BOTTOM (FOOTER?) -->
-        <div>
-          <div class="flex justify-between border-y border-dotted text-4xl">
-            <p>TOTAL</p>
-            <p>&#x20B1 100</p>
-          </div>
-          <div class="flex justify-between md:text-xl">
-            <p>18/04/2025</p>
-            <p>SPARCS APPLICATION</p>
-          </div>
-          <div class="md:w-[70%] mx-auto">
-            <p class="text-2xl md:text-4xl">Thank You For Supporting Local Business!</p>
-          </div>
+      <!-- BOTTOM (FOOTER?) -->
+      <div>
+        <div class="flex justify-between border-y border-dotted text-4xl">
+          <p>TOTAL</p>
+          <p>&#x20B1 100</p>
         </div>
+        <div class="flex justify-between md:text-xl">
+          <p>18/04/2025</p>
+          <p>SPARCS APPLICATION</p>
+        </div>
+        <div class="md:w-[70%] mx-auto">
+          <p class="text-2xl md:text-4xl">Thank You For Supporting Local Business!</p>
+        </div>
+      </div>
     </div>
   </main>
 </template>
