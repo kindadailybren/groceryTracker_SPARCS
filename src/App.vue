@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Forms from './components/Forms.vue';
 import { useItemStore } from './stores/item';
+import { useAllProductsStore } from './stores/allProducts';
+import { onMounted, ref } from 'vue';
 
 const store = useItemStore();
 store.addItem({
@@ -9,6 +11,24 @@ store.addItem({
   quantity: 5,
   price: 100,
 });
+
+const products = useAllProductsStore();
+const loading = ref(true);
+
+onMounted(async () => {
+  await products.fetchProducts();
+  await delay(200);
+  loading.value = false;
+})
+
+const delay = (ms: number) => new Promise(resolve => {
+  setTimeout(() => {
+    resolve(true);
+  }, ms);
+});
+
+// <Forms v-for="item in store.items" :key="item.id" :item="item" />
+
 </script>
 
 <template>
@@ -16,7 +36,7 @@ store.addItem({
 
     <!-- RECEIPT CARD -->
     <div
-      class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll md:overflow-clip">
+      class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll">
 
       <!-- HEADING -->
       <div class="flex flex-col">
@@ -30,7 +50,12 @@ store.addItem({
 
       <!-- FORM -->
       <div class="h-[400px]">
-        <Forms v-for="item in store.items" :key="item.id" :item="item" />
+        <div v-if="loading">
+          <p class="text-2xl">Loading groceries. Mag wait ka dawg!</p>
+        </div>
+        <div v-else>
+          <Forms v-for="product in products.products" :name="product.name" :price="product.price" :quantity="product.quantity" :key="product.id" />
+        </div>
       </div>
 
       <!-- BOTTOM (FOOTER?) -->

@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { useItemStore } from '@/stores/item'
 console.log("diri ang mga forms dawg!")
 import { ref } from 'vue'
 import Button from './Button.vue'
 import Trash from './Trash.vue'
 
+defineProps({
+  id: { type: String, required: false },
+  name: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  price: { type: Number, required: true }
+});
 
 const isEditing = ref(false)
 </script>
@@ -12,26 +17,31 @@ const isEditing = ref(false)
 <template>
   <section>
     <div>
+
       <!-- task -->
       <div class="flex flex-col gap-4">
         <div class="flex justify-between text-2xl xl:text-3xl items-center">
-          <p>Marlboro Pula</p>
-          <div class="flex gap-2 xl:gap-4">
-            <p>&#x20B1 100</p>
-            <span>x</span>
-            <p>1</p>
-          </div>
-          <div>
-            <button class="hover:cursor-pointer" @click="isEditing = !isEditing">
-              Edit
-            </button>
+          <p>{{ name }}</p>
+
+          <div class="flex gap-10">
+            <div class="flex gap-2 xl:gap-4">
+              <p>&#x20B1 {{ price }}</p>
+              <p>x</p>
+              <p>{{ quantity }}</p>
+            </div>
+
+            <div>
+              <button class="hover:cursor-pointer" @click="isEditing = !isEditing">
+                Edit
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- edit state -->
         <div v-if="isEditing" class="flex flex-col gap-2">
           <div class="flex items-center justify-between text-2xl gap-4">
-            <input type="text" placeholder="Marlboro Pula" class="w-full border-b border-dashed px-4" />
+            <input type="text" :placeholder="name" class="w-full border-b border-dashed px-4" />
             <div class="flex items-center justify-center gap-1">
               <Button msg="-" />
               <Button msg="+" class="hover:bg-green-400" />
