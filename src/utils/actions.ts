@@ -1,30 +1,9 @@
 import { supabase } from "../supabase/supabaseClient";
 
-type InsertProduct = {
-    product_name: string;
-    quantity: number;
-    price: number;
-};
-
-export const addItem = async (product: InsertProduct) => {
-    const { product_name, quantity, price } = product;
-
+export const addItem = async (name: string, price: number, quantity: number) => {
     const { data, error } = await supabase
-        .from('product')
-        .insert([
-            {
-                name: product_name,
-                quantity: quantity,
-                price: price
-            }
-        ])
-        .select();
-
-    if (error) {
-        console.error("Error inserting product:", error);
-        return null;
-    }
-
-    console.log("Inserted product:", data);
-    return data;
+        .from("product")
+        .insert([{ name, price, quantity }]);
+    if (error) console.error("Insert failed", error);
+    else console.log("Inserted item", data);
 };
