@@ -22,6 +22,7 @@ const priceRef = ref(product.value?.price ?? 0)
 const quantityRef = ref(product.value?.quantity ?? 0)
 
 const update = async () => {
+  isEditing.value = !isEditing.value
   if (!product.value) return;
   await updateProduct(
     product.value.id,
