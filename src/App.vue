@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import Forms from './components/Forms.vue';
-import { useItemStore } from '@/stores/item';
+import { useItemStore } from './stores/item';
+
+const store = useItemStore();
+store.addItem({
+  id: Date.now(),
+  name: 'Marlboro Pula',
+  quantity: 5,
+  price: 100,
+});
 </script>
 
 <template>
@@ -22,7 +30,7 @@ import { useItemStore } from '@/stores/item';
 
       <!-- FORM -->
       <div class="h-[400px]">
-        <Forms />
+        <Forms v-for="item in store.items" :key="item.id" :item="item" />
       </div>
 
       <!-- BOTTOM (FOOTER?) -->
