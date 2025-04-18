@@ -13,6 +13,7 @@ const props = defineProps({
   id: { type: String, required: true },
 });
 
+
 const product = computed(() =>
   productStore.products.find((p) => p.id === props.id)
 )
@@ -30,6 +31,10 @@ const update = async () => {
     quantityRef.value
   )
   isEditing.value = false
+}
+
+const deleteProd = async () => {
+  await deleteProduct(props.id);
 };
 
 const decrement = () => {
@@ -38,15 +43,12 @@ const decrement = () => {
   }
 }
 
-const isEditing = ref(false)
 </script>
 
 
 <template>
   <section>
     <div>
-
-
       <!-- task -->
       <div class="flex flex-col gap-4">
         <div class="flex justify-between text-2xl xl:text-3xl items-center">
@@ -76,7 +78,7 @@ const isEditing = ref(false)
             <div class="flex items-center justify-center gap-1">
               <Button @click="decrement" msg="-" />
               <Button @click="quantityRef++" msg="+" class="hover:bg-green-400" />
-              <button
+              <button @click="deleteProd"
                 class="border-[1px] border-dashed px-4 py-1 text-2xl cursor-pointer hover:bg-red-400 transition-all duration-150">
                 <Trash class="w-6 h-6" />
 

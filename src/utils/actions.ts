@@ -34,7 +34,7 @@ export const updateProduct = async (
   }
 };
 
-export const deleteProduct = async (id: number) => {
+export const deleteProduct = async (id: string) => {
   const { data, error } = await supabase
     .from("product") // your table name
     .delete()
