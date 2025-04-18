@@ -1,33 +1,54 @@
 <script setup lang="ts">
 import Forms from './components/Forms.vue';
-import { useItemStore } from './stores/item';
 import { useAllProductsStore } from './stores/allProducts';
-import { onMounted, ref } from 'vue';
-
-const store = useItemStore();
-store.addItem({
-  id: Date.now(),
-  name: 'Marlboro Pula',
-  quantity: 5,
-  price: 100,
-});
+import { onMounted, ref, watch, nextTick } from 'vue';
+import Button from './components/Button.vue';
+import { addItem } from './utils/actions';
 
 const products = useAllProductsStore();
+
 const loading = ref(true);
+const product_name = ref("");
+const price = ref(0);
+const quantity = ref(1)
+const scrollContainer = ref<HTMLElement | null>(null);
+
+// mag watch siya if naay bago na item na ma add, then mag scroll to that item
+watch(
+  () => products.products.length,
+  async () => {
+    await nextTick();
+    if (scrollContainer.value) {
+      scrollContainer.value.scrollTo({
+        top: scrollContainer.value.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  }
+);
+
+const add = async () => {
+  await addItem(product_name.value, price.value, quantity.value);
+  product_name.value = "";
+  price.value = 0;
+  quantity.value = 0;
+};
+
 
 onMounted(async () => {
   await products.fetchProducts();
+  products.subscribeToProductChanges();
   await delay(200);
   loading.value = false;
 })
 
+// delay for loading state ni shea
 const delay = (ms: number) => new Promise(resolve => {
   setTimeout(() => {
     resolve(true);
   }, ms);
 });
 
-// <Forms v-for="item in store.items" :key="item.id" :item="item" />
 
 </script>
 
@@ -36,7 +57,7 @@ const delay = (ms: number) => new Promise(resolve => {
 
     <!-- RECEIPT CARD -->
     <div
-      class="grid h-[85%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow overflow-y-scroll">
+      class="grid h-[90%] bg-white w-[90%] text-center p-4  bg-[url('./assets/paper-texture.jpg')] bg-cover bg-no-repeat bg-center border-y-4 border-dashed border-gray-700 card-shadow">
 
       <!-- HEADING -->
       <div class="flex flex-col">
@@ -49,17 +70,29 @@ const delay = (ms: number) => new Promise(resolve => {
       </div>
 
       <!-- FORM -->
-      <div class="h-[400px]">
+      <div ref="scrollContainer" class="h-[400px] overflow-y-scroll">
         <div v-if="loading">
           <p class="text-2xl">Loading groceries. Mag wait ka dawg!</p>
         </div>
         <div v-else>
-          <Forms v-for="product in products.products" :name="product.name" :price="product.price" :quantity="product.quantity" :key="product.id" />
+          <Forms v-for="product in products.products" :name="product.name" :price="product.price"
+            :quantity="product.quantity" :key="product.id" />
         </div>
       </div>
 
       <!-- BOTTOM (FOOTER?) -->
-      <div>
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-4">
+          <input type="text" placeholder="Input an item"
+            class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4" v-model="product_name" @keyup.enter="add">
+          <div class="flex gap-2">
+            <input type="number" placeholder="Price" class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4"
+              v-model="price" @keyup.enter="add">
+            <input type="number" placeholder="Qty" class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4"
+              v-model="quantity" @keyup.enter="add">
+          </div>
+          <Button msg="Add" class="hover:bg-green-400" @click="add" />
+        </div>
         <div class="flex justify-between border-y border-dotted text-4xl">
           <p>TOTAL</p>
           <p>&#x20B1 100</p>
