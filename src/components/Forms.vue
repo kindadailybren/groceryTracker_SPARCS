@@ -13,6 +13,7 @@ const props = defineProps({
   id: { type: String, required: true },
 });
 
+
 const product = computed(() =>
   productStore.products.find((p) => p.id === props.id)
 )
@@ -31,6 +32,10 @@ const update = async () => {
     quantityRef.value
   )
   isEditing.value = false
+}
+
+const deleteProd = async () => {
+  await deleteProduct(props.id);
 };
 
 const deleteProd = async () => {
@@ -43,15 +48,12 @@ const decrement = () => {
   }
 }
 
-const isEditing = ref(false)
 </script>
 
 
 <template>
   <section>
     <div>
-
-
       <!-- task -->
       <div class="flex flex-col gap-4">
         <div class="flex justify-between text-2xl xl:text-3xl items-center">
