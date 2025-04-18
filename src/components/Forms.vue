@@ -20,6 +20,7 @@ const priceRef = ref(props.price)
 const isEditing = ref(false)
 
 const update = async () => {
+  isEditing.value = !isEditing.value
   await updateProduct(props.id, nameRef.value, quantityRef.value, priceRef.value);
 };
 
@@ -76,7 +77,7 @@ const decrement = () => {
             </div>
           </div>
 
-          <Button @click="() => { update; isEditing = !isEditing }" msg="Save" class="hover:bg-green-400" />
+          <Button @click="update" msg="Save" class="hover:bg-green-400" />
         </div>
 
       </div>
