@@ -22,6 +22,10 @@ const update = async () => {
   await updateProduct(props.id, nameRef.value, quantityRef.value, priceRef.value);
 };
 
+const deleteProd = async () => {
+  await deleteProduct(props.id);
+};
+
 const decrement = () => {
   if (quantityRef.value > 0) {
     quantityRef.value--
@@ -66,7 +70,7 @@ const isEditing = ref(false)
             <div class="flex items-center justify-center gap-1">
               <Button @click="decrement" msg="-" />
               <Button @click="quantityRef++" msg="+" class="hover:bg-green-400" />
-              <button
+              <button @click="deleteProd"
                 class="border-[1px] border-dashed px-4 py-1 text-2xl cursor-pointer hover:bg-red-400 transition-all duration-150">
                 <Trash class="w-6 h-6" />
 
