@@ -38,16 +38,12 @@ const deleteProd = async () => {
   await deleteProduct(props.id);
 };
 
-const deleteProd = async () => {
-  await deleteProduct(props.id);
-};
-
 const decrement = () => {
   if (quantityRef.value > 0) {
     quantityRef.value--
   }
 }
-
+const isEditing = ref(false)
 </script>
 
 
