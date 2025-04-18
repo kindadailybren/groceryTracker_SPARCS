@@ -1,25 +1,35 @@
 <script setup lang="ts">
 console.log("diri ang mga forms dawg!")
-import { ref } from 'vue'
-import { updateProduct, deleteProduct } from '../utils/actions.ts'
+import { ref, computed } from 'vue'
+import { updateProduct } from '../utils/actions.ts'
 import Button from './Button.vue'
 import Trash from './Trash.vue'
+import { useAllProductsStore } from '../stores/allProducts.ts'
+
+const productStore = useAllProductsStore()
 
 
 const props = defineProps({
-  id: { type: String, required: false },
-  name: { type: String, required: true },
-  quantity: { type: Number, required: true },
-  price: { type: Number, required: true }
+  id: { type: String, required: true },
 });
 
-// Mao ni akong ihatag sa update na function, para dynamic update pud
-const nameRef = ref(props.name)
-const quantityRef = ref(props.quantity)
-const priceRef = ref(props.price)
+const product = computed(() =>
+  productStore.products.find((p) => p.id === props.id)
+)
+
+const nameRef = ref(product.value?.name ?? "")
+const priceRef = ref(product.value?.price ?? 0)
+const quantityRef = ref(product.value?.quantity ?? 0)
 
 const update = async () => {
-  await updateProduct(props.id, nameRef.value, quantityRef.value, priceRef.value);
+  if (!product.value) return;
+  await updateProduct(
+    product.value.id,
+    nameRef.value,
+    priceRef.value,
+    quantityRef.value
+  )
+  isEditing.value = false
 };
 
 const decrement = () => {
@@ -62,7 +72,7 @@ const isEditing = ref(false)
 
         <div v-if="isEditing" class="flex flex-col gap-2">
           <div class="flex items-center justify-between text-2xl gap-4">
-            <input v-model="nameRef" type="text" :placeholder="name" class="w-full border-b border-dashed px-4" />
+            <input v-model="nameRef" type="text" :placeholder="product?.name" class="w-full border-b border-dashed px-4" @keydown.enter="update" />
             <div class="flex items-center justify-center gap-1">
               <Button @click="decrement" msg="-" />
               <Button @click="quantityRef++" msg="+" class="hover:bg-green-400" />
