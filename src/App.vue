@@ -78,7 +78,7 @@ const delay = (ms: number) => new Promise(resolve => {
           <p class="text-2xl">Loading groceries. Mag wait ka dawg!</p>
         </div>
         <div v-else>
-          <Forms v-for="product in products.products" :name="product.name" :price="product.price"
+          <Forms v-for="product in products.sortedProducts" :name="product.name" :price="product.price"
             :quantity="product.quantity" :id="product.id" :key="product.id" />
         </div>
       </div>
@@ -98,7 +98,7 @@ const delay = (ms: number) => new Promise(resolve => {
         </div>
         <div class="flex justify-between border-y border-dotted text-4xl">
           <p>TOTAL</p>
-          <p>&#x20B1 100</p>
+          <p>&#x20B1 {{ products.totalPrice }}</p>
         </div>
         <div class="flex justify-between md:text-xl">
           <p>18/04/2025</p>

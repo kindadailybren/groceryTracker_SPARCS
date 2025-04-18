@@ -29,9 +29,9 @@ export const useAllProductsStore = defineStore("allProducts", {
 
     subscribeToProductChanges() {
       if (this.subscribed) return;
-
+    
       const channel = supabase.channel("product-changes");
-
+    
       channel
         .on(
           "postgres_changes",
@@ -39,20 +39,20 @@ export const useAllProductsStore = defineStore("allProducts", {
           (payload) => {
             console.log("Realtime payload received:", payload);
             const { eventType, new: newItem, old: oldItem } = payload;
-
+    
             switch (eventType) {
               case "INSERT":
                 this.products.push(newItem as Product);
                 break;
+    
               case "UPDATE":
                 this.products = this.products.map((p) =>
                   p.id === newItem.id ? (newItem as Product) : p
                 );
                 break;
+    
               case "DELETE":
-                this.products = this.products.filter(
-                  (p) => p.id !== oldItem.id
-                );
+                this.products = this.products.filter((p) => p.id !== oldItem.id);
                 break;
             }
           }
@@ -60,8 +60,15 @@ export const useAllProductsStore = defineStore("allProducts", {
         .subscribe((status) => {
           console.log("Subscription status:", status);
         });
-
+    
       this.subscribed = true;
-    },
+    }
+    
   },
+  getters: {
+    sortedProducts: (state) => [...state.products].sort((a, b) => a.name.localeCompare(b.name)),
+    totalPrice: (state) => {
+      return state.products.reduce((total, product) => total + product.price * product.quantity, 0) // reduce() adds each product's price * quantity to the total, ra siyag recursion
+    }
+  }
 });
