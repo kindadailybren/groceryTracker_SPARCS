@@ -38,7 +38,7 @@ const deleteProd = async () => {
 };
 
 const decrement = () => {
-  if (quantityRef.value > 0) {
+  if (quantityRef.value > 1) {
     quantityRef.value--
   }
 }
