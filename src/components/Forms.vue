@@ -27,8 +27,8 @@ const update = async () => {
   await updateProduct(
     product.value.id,
     nameRef.value,
+    quantityRef.value,
     priceRef.value,
-    quantityRef.value
   )
   isEditing.value = false
 }
@@ -74,7 +74,8 @@ const isEditing = ref(false)
 
         <div v-if="isEditing" class="flex flex-col gap-2">
           <div class="flex items-center justify-between text-2xl gap-4">
-            <input v-model="nameRef" type="text" :placeholder="product?.name" class="w-full border-b border-dashed px-4" @keydown.enter="update" />
+            <input v-model="nameRef" type="text" :placeholder="product?.name" class="w-full border-b border-dashed px-4"
+              @keydown.enter="update" />
             <div class="flex items-center justify-center gap-1">
               <Button @click="decrement" msg="-" />
               <Button @click="quantityRef++" msg="+" class="hover:bg-green-400" />
