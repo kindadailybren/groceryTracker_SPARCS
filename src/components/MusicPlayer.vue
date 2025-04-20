@@ -14,7 +14,7 @@ const { play, stop } = useSound(bgMusic, {
 
 const { play: play2, pause } = useSound(reyValera, {
     volume: 0.2,
-    loop: false,
+    loop: true,
     autoplay: true,
 })
 </script>
@@ -33,7 +33,7 @@ const { play: play2, pause } = useSound(reyValera, {
             <div v-else class="flex flex-col justify-center">
                 <button @click="() => { pause(); isPlaying2 = true; }"
                     class="bg-red-400 px-8 py-2 hover:bg-red-500 cursor-pointer">PAUSE</button>
-                <div class="flex-col text-center text-white hidden">
+                <div class="flex-col text-center text-white hidden xl:flex">
                     <p class="text-2xl">Playing Naaalala Ka</p>
                     <p>by</p>
                     <p class="text-2xl">Rey Valera</p>
