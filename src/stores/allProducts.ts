@@ -37,7 +37,7 @@ export const useAllProductsStore = defineStore("allProducts", {
           "postgres_changes",
           { event: "*", schema: "public", table: "product" },
           (payload) => {
-            console.log("Realtime payload received:", payload);
+            //console.log("Realtime payload received:", payload);
             const { eventType, new: newItem, old: oldItem } = payload;
     
             switch (eventType) {
@@ -58,7 +58,8 @@ export const useAllProductsStore = defineStore("allProducts", {
           }
         )
         .subscribe((status) => {
-          console.log("Subscription status:", status);
+          //console.log("Subscription status:", status);
+          return status;
         });
     
       this.subscribed = true;
