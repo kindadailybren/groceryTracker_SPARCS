@@ -40,6 +40,7 @@ const add = async () => {
     alert("Enter Valid Quantity")
     return;
   }
+  quantity.value = Math.floor(quantity.value);
   await addItem(product_name.value, price.value, quantity.value);
   product_name.value = "";
   price.value = 0;
