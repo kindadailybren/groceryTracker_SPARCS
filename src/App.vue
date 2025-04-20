@@ -21,7 +21,7 @@ watch(
     await nextTick();
     if (scrollContainer.value) {
       scrollContainer.value.scrollTo({
-        top: scrollContainer.value.scrollHeight,
+        top: 0,
         behavior: 'smooth'
       });
     }
@@ -29,6 +29,16 @@ watch(
 );
 
 const add = async () => {
+  if(product_name.value === "") {
+    alert("Enter Product Name")
+    return;
+  } else if (price.value <= 0){
+    alert("Enter Valid Price")
+    return;
+  } else if (quantity.value <= 0){
+    alert("Enter Valid Quantity")
+    return;
+  }
   await addItem(product_name.value, price.value, quantity.value);
   product_name.value = "";
   price.value = 0;
@@ -98,14 +108,14 @@ const delay = (ms: number) => new Promise(resolve => {
         </div>
         <div class="flex justify-between border-y border-dotted text-4xl">
           <p>TOTAL</p>
-          <p>&#x20B1 {{ products.totalPrice }}</p>
+          <p>&#x20B1 {{ products.totalPrice.toFixed(2) }}</p>
         </div>
         <div class="flex justify-between md:text-xl">
           <p>18/04/2025</p>
           <p>SPARCS APPLICATION</p>
         </div>
         <div class="md:w-[70%] mx-auto">
-          <p class="text-2xl md:text-4xl">Thank You For Supporting Local Business!</p>
+          <p class="text-1xl md:text-4xl">Thank You For Supporting Local Business!</p>
         </div>
       </div>
     </div>
