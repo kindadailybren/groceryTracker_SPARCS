@@ -1,5 +1,4 @@
 <script setup lang="ts">
-console.log("diri ang mga forms dawg!")
 import { ref, computed } from 'vue'
 import { updateProduct, deleteProduct } from '../utils/actions.ts'
 import Button from './Button.vue'
