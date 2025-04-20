@@ -13,6 +13,7 @@ const product_name = ref("");
 const price = ref(0);
 const quantity = ref(1)
 const scrollContainer = ref<HTMLElement | null>(null);
+const date = new Date().toISOString().split('T')[0];
 
 // mag watch siya if naay bago na item na ma add, then mag scroll to that item
 watch(
@@ -29,13 +30,13 @@ watch(
 );
 
 const add = async () => {
-  if(product_name.value === "") {
+  if (product_name.value === "") {
     alert("Enter Product Name")
     return;
-  } else if (price.value <= 0){
+  } else if (price.value <= 0) {
     alert("Enter Valid Price")
     return;
-  } else if (quantity.value <= 0){
+  } else if (quantity.value <= 0) {
     alert("Enter Valid Quantity")
     return;
   }
@@ -99,10 +100,16 @@ const delay = (ms: number) => new Promise(resolve => {
           <input type="text" placeholder="Input an item"
             class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4" v-model="product_name" @keyup.enter="add">
           <div class="flex gap-2">
-            <input type="number" placeholder="Price" class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4"
-              v-model="price" @keyup.enter="add">
-            <input type="number" placeholder="Qty" class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4"
-              v-model="quantity" @keyup.enter="add">
+            <div>
+              <label for="price">Price</label>
+              <input type="number" name="price" placeholder="Price"
+                class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4" v-model="price" @keyup.enter="add">
+            </div>
+            <div>
+              <label for="qty">Qty</label>
+              <input type="number" name="qty" placeholder="Qty" class="md:text-2xl w-full border-y-2 focus:outline-none md:px-4"
+                v-model="quantity" @keyup.enter="add">
+            </div>
           </div>
           <Button msg="Add" class="hover:bg-green-400" @click="add" />
         </div>
@@ -111,7 +118,7 @@ const delay = (ms: number) => new Promise(resolve => {
           <p>&#x20B1 {{ products.totalPrice.toFixed(2) }}</p>
         </div>
         <div class="flex justify-between md:text-xl">
-          <p>18/04/2025</p>
+          <p>{{ date }}</p>
           <p>SPARCS APPLICATION</p>
         </div>
         <div class="md:w-[70%] mx-auto">

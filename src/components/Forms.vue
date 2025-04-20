@@ -1,5 +1,4 @@
 <script setup lang="ts">
-console.log("diri ang mga forms dawg!")
 import { ref, computed } from 'vue'
 import { updateProduct, deleteProduct } from '../utils/actions.ts'
 import Button from './Button.vue'
@@ -23,6 +22,7 @@ const priceRef = ref(product.value?.price ?? 0)
 const quantityRef = ref(product.value?.quantity ?? 0)
 
 const update = async () => {
+  isEditing.value = !isEditing.value
   if (!product.value) return;
   await updateProduct(
     product.value.id,
