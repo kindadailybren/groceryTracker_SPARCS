@@ -1,5 +1,48 @@
-# Vue 3 + TypeScript + Vite
+🛒 groceryTracker_SPARCS
+A simple and efficient grocery tracking app built with Vue 3, TypeScript, and Vite. This project is designed to help users manage grocery items through a clean interface, with fast performance powered by Vite and strong type safety from TypeScript.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+🚀 Features
+✅ Add and remove grocery items
+📦 View list of tracked items
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+📦 Tech Stack
+Framework: Vue 3
+
+Build Tool: Vite
+
+Language: TypeScript
+
+State Management: Pinia (planned/included)
+
+Backend: Supabase (optional, based on context)
+
+🛠️ Project Setup
+```
+# Clone the repository
+git clone https://github.com/kindadailybren/groceryTracker_SPARCS.git
+cd groceryTracker_SPARCS
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+🧪 Scripts
+
+Command	Description
+`npm run dev`	Start local dev server
+`npm run build`	Build for production
+`npm run lint`	Lint the code
+
+
+👨‍💻 Author
+Errol Minguez
+UP Mindanao · BS Computer Science
+
+Breindel Medina
+UP Mindanao · BS Computer Science
+
+📄 License
+This project is licensed under the MIT License — feel free to use it and modify it for your own needs.
